@@ -5,13 +5,15 @@ import { GlobalStyle } from './Styles/global'
 import { Home } from './Pages/Home/Home'
 
 import { NavBarComponent } from './NavBarComponent/NavBar'
+import { Checkout } from './Pages/Checkout/Checkout'
 
 export function App() {
   return (
     <ThemeProvider theme={defaultTheme}>
       <BrowserRouter>
         <NavBarComponent />
-        <Home />
+        {/* <Home /> */}
+        <Checkout />
       </BrowserRouter>
       <GlobalStyle />
     </ThemeProvider>
