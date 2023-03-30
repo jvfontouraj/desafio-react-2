@@ -1,38 +1,55 @@
-import { Bank, CreditCard, CurrencyDollar, MapPin, Money } from 'phosphor-react'
-import { CompleteOrderContainer } from './CompleteOrder.style'
+import {
+  Bank,
+  CreditCard,
+  CurrencyDollar,
+  MapPinLine,
+  Money,
+} from 'phosphor-react'
+import {
+  AdressContainer,
+  AdressFormContainer,
+  ComplementContainer,
+  CompleteOrderContainer,
+  PaymentContainer,
+  PaymentMethodsContent,
+} from './CompleteOrder.style'
 
 export function CompletedOrder() {
   return (
     <CompleteOrderContainer>
       <h2>Complete seu pedido</h2>
-      <div>
-        {/* Endereço */}
+      <AdressContainer>
         <header>
-          <MapPin weight="fill" size={22} />
+          <MapPinLine size={22} className="mapIcon" />
           <div>
             <h3>Endereço de Entrega</h3>
             <h4>Informe o endereço onde deseja receber seu pedido</h4>
           </div>
         </header>
-        <form action="">
-          <input type="number" placeholder="CEP" />
-          <input type="text" placeholder="Rua" />
+        <AdressFormContainer>
+          <input type="number" placeholder="CEP" className="cep" />
+          <input type="text" placeholder="Rua" className="rua" />
           <div>
-            <input type="number" placeholder="Número" />
-            <input type="text" placeholder="Completemento(Opcional)" />
+            <input type="number" placeholder="Número" className="numero" />
+            <ComplementContainer>
+              <input
+                type="text"
+                placeholder="Completemento"
+                className="complemento"
+              />
+            </ComplementContainer>
           </div>
           <div>
-            <input type="text" placeholder="Bairro" />
-            <input type="text" placeholder="Cidade" />
-            <input type="text" placeholder="UF" />
+            <input type="text" placeholder="Bairro" className="bairro" />
+            <input type="text" placeholder="Cidade" className="cidade" />
+            <input type="text" placeholder="UF" className="uf" />
           </div>
-        </form>
-      </div>
+        </AdressFormContainer>
+      </AdressContainer>
 
-      <div>
-        {/* Pagamento */}
+      <PaymentContainer>
         <header>
-          <CurrencyDollar weight="fill" size={22} />
+          <CurrencyDollar size={22} className="purpleIcons" />
           <div>
             <h3>Pagamento</h3>
             <h4>
@@ -40,21 +57,21 @@ export function CompletedOrder() {
             </h4>
           </div>
         </header>
-        <div>
+        <PaymentMethodsContent>
           <button>
-            <CreditCard />
+            <CreditCard size={16} className="purpleIcons" />
             <span>Cartão de Crédito</span>
           </button>
           <button>
-            <Bank />
+            <Bank size={16} className="purpleIcons" />
             <span>Cartão de Débito</span>
           </button>
           <button>
-            <Money />
+            <Money size={16} className="purpleIcons" />
             <span>Dinheiro</span>
           </button>
-        </div>
-      </div>
+        </PaymentMethodsContent>
+      </PaymentContainer>
     </CompleteOrderContainer>
   )
 }
