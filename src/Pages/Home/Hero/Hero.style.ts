@@ -40,6 +40,7 @@ export const HeroContainer = styled.section`
     padding-top: 5.875rem;
     width: 36.75rem;
     margin-right: 3.5rem;
+    margin-bottom: 6.75rem;
   }
 
   .itemsDiv {
