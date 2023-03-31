@@ -106,9 +106,9 @@ export const ComplementContainer = styled.div`
 
   ::after {
     position: absolute;
-    content: 'Opcicional';
-    top: 0.85rem;
-    left: 17rem;
+    content: 'Opcional';
+    top: 0.65rem;
+    left: 18rem;
     font-style: italic;
     font-size: 0.75rem;
     color: ${(props) => props.theme['base-label']};

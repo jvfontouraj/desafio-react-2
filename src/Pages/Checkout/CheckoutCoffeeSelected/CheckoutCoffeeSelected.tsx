@@ -6,6 +6,7 @@ import {
   ContentContainer,
   CounterContainer,
   TopRowContainer,
+  TrashButton,
 } from './CheckoutCoffeeSelected.style'
 
 export function CheckoutCoffeeSelected() {
@@ -15,26 +16,28 @@ export function CheckoutCoffeeSelected() {
       <ContentContainer>
         <TopRowContainer>
           <h3>Expresso Tradicional</h3>
-          <h3>R$ 9,90</h3>
+          <span>R$ 9,90</span>
         </TopRowContainer>
 
         <BottomRowContainer>
-          <CounterContainer>
-            <button>
-              <Minus size={14} className="counterIcon" />
-            </button>
-            <div className="counterNumberContainer">
-              <span className="counterNumber">1</span>
-            </div>
-            <button>
-              <Plus size={14} className="counterIcon" />
-            </button>
-          </CounterContainer>
+          <div>
+            <CounterContainer>
+              <button>
+                <Minus size={14} className="counterIcon" />
+              </button>
+              <div className="counterNumberContainer">
+                <span className="counterNumber">1</span>
+              </div>
+              <button>
+                <Plus size={14} className="counterIcon" />
+              </button>
+            </CounterContainer>
 
-          <button>
-            <Trash />
-            <span>Remover</span>
-          </button>
+            <TrashButton>
+              <Trash size={16} className="trashIcon" />
+              <span>Remover</span>
+            </TrashButton>
+          </div>
         </BottomRowContainer>
       </ContentContainer>
     </CheckoutCoffeeSelectedContainer>

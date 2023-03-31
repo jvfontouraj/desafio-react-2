@@ -13,6 +13,7 @@ export function SelectedCoffees() {
       <h2>Cafés selecionados</h2>
       <ContentContainer>
         <CheckoutCoffeeSelected />
+        <CheckoutCoffeeSelected />
         <SubTotalContainer>
           <div>
             <h4 className="subtotalText">Total de itens</h4>
@@ -26,10 +27,8 @@ export function SelectedCoffees() {
         </SubTotalContainer>
 
         <TotalContainer>
-          <div>
-            <span className="totalText">Total</span>
-            <span className="totalFee">R$33,20</span>
-          </div>
+          <span className="totalText">Total</span>
+          <span className="totalFee">R$33,20</span>
         </TotalContainer>
 
         <ConfirmButton>Confirmar Pedido</ConfirmButton>

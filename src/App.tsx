@@ -6,6 +6,7 @@ import { Home } from './Pages/Home/Home'
 
 import { NavBarComponent } from './NavBarComponent/NavBar'
 import { Checkout } from './Pages/Checkout/Checkout'
+import { Success } from './Pages/Success/Success'
 
 export function App() {
   return (
@@ -13,7 +14,8 @@ export function App() {
       <BrowserRouter>
         <NavBarComponent />
         {/* <Home /> */}
-        <Checkout />
+        {/* <Checkout /> */}
+        <Success />
       </BrowserRouter>
       <GlobalStyle />
     </ThemeProvider>
