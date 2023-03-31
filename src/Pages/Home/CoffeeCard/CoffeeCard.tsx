@@ -1,8 +1,19 @@
 import { CoffeeCardContainer } from './CoffeeCard.style'
 import ExpressoTradicional from '../../../assets/Coffee/Type=Expresso.png'
 import { Minus, Plus, ShoppingCart } from 'phosphor-react'
+import { useState } from 'react'
 
 export function CoffeeCard() {
+  const [numberOfCoffees, setNumberOfCoffees] = useState(0)
+
+  function handleDecreaseButton() {
+    setNumberOfCoffees(numberOfCoffees - 1)
+  }
+
+  function handleIncreaseButton() {
+    setNumberOfCoffees(numberOfCoffees + 1)
+  }
+
   return (
     <CoffeeCardContainer>
       <img src={ExpressoTradicional} alt="" />
@@ -17,13 +28,13 @@ export function CoffeeCard() {
           <span className="price">9,90</span>
         </div>
         <div className="counterContainer">
-          <button>
+          <button disabled={!numberOfCoffees} onClick={handleDecreaseButton}>
             <Minus size={14} className="counterIcon" />
           </button>
           <div className="counterNumberContainer">
-            <span className="counterNumber">1</span>
+            <span className="counterNumber">{numberOfCoffees}</span>
           </div>
-          <button>
+          <button onClick={handleIncreaseButton}>
             <Plus size={14} className="counterIcon" />
           </button>
         </div>

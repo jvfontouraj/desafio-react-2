@@ -13,9 +13,9 @@ export function App() {
     <ThemeProvider theme={defaultTheme}>
       <BrowserRouter>
         <NavBarComponent />
-        {/* <Home /> */}
+        <Home />
         {/* <Checkout /> */}
-        <Success />
+        {/* <Success /> */}
       </BrowserRouter>
       <GlobalStyle />
     </ThemeProvider>
