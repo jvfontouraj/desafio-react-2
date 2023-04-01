@@ -92,6 +92,7 @@ export const CoffeeCardContainer = styled.section`
     width: 1.25em;
     height: auto;
     text-align: center;
+    cursor: default;
   }
 
   .counterNumber {
@@ -102,7 +103,19 @@ export const CoffeeCardContainer = styled.section`
     color: ${(props) => props.theme['purple-']};
     box-sizing: content-box;
     padding: 12px 8px;
+    transition: all 0.3s;
+    cursor: pointer;
   }
+
+  .counterIcon:hover {
+    color: ${(props) => props.theme['purple-dark']};
+  }
+`
+
+export const ShoppingCartButton = styled.button`
+  border: none;
+  background: none;
+  cursor: pointer;
 
   .shoppingIcon {
     box-sizing: content-box;
@@ -110,5 +123,10 @@ export const CoffeeCardContainer = styled.section`
     color: ${(props) => props.theme['base-card']};
     border-radius: 6px;
     padding: 0.5rem;
+    transition: all 0.3s;
+  }
+
+  .shoppingIcon:hover {
+    background-color: ${(props) => props.theme['purple-']};
   }
 `

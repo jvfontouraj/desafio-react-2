@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { CheckoutCoffeeSelected } from '../CheckoutCoffeeSelected/CheckoutCoffeeSelected'
 import {
   ConfirmButton,
@@ -31,7 +32,9 @@ export function SelectedCoffees() {
           <span className="totalFee">R$33,20</span>
         </TotalContainer>
 
-        <ConfirmButton>Confirmar Pedido</ConfirmButton>
+        <Link to="/success" title="Success">
+          <ConfirmButton>Confirmar Pedido</ConfirmButton>
+        </Link>
       </ContentContainer>
     </SelectedCoffeeContainer>
   )

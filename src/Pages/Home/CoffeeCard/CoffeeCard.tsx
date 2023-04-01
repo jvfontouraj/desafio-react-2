@@ -1,4 +1,4 @@
-import { CoffeeCardContainer } from './CoffeeCard.style'
+import { CoffeeCardContainer, ShoppingCartButton } from './CoffeeCard.style'
 import ExpressoTradicional from '../../../assets/Coffee/Type=Expresso.png'
 import { Minus, Plus, ShoppingCart } from 'phosphor-react'
 import { useState } from 'react'
@@ -38,7 +38,9 @@ export function CoffeeCard() {
             <Plus size={14} className="counterIcon" />
           </button>
         </div>
-        <ShoppingCart weight="fill" size={22} className="shoppingIcon" />
+        <ShoppingCartButton>
+          <ShoppingCart weight="fill" size={22} className="shoppingIcon" />
+        </ShoppingCartButton>
       </div>
     </CoffeeCardContainer>
   )

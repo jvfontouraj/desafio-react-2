@@ -30,6 +30,11 @@ export const ContentContainer = styled.div`
     display: flex;
     justify-content: space-between;
   }
+
+  a {
+    color: ${(props) => props.theme['white-']};
+    text-decoration: none;
+  }
 `
 export const SubTotalContainer = styled.div`
   display: flex;
@@ -58,7 +63,7 @@ export const TotalContainer = styled.div`
 
 export const ConfirmButton = styled.button`
   display: flex;
-  flex-direction: row;
+  width: 23rem;
   justify-content: center;
   align-items: center;
   padding: 12px 8px;
@@ -66,4 +71,10 @@ export const ConfirmButton = styled.button`
   color: ${(props) => props.theme['white-']};
   border-radius: 6px;
   border: none;
+  cursor: pointer;
+  transition: all 0.3s;
+
+  :hover {
+    background: ${(props) => props.theme['yellow-dark']};
+  }
 `

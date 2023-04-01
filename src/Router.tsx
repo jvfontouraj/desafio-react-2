@@ -1,15 +1,14 @@
-// import { Routes, Route } from 'react-router-dom'
-// import { DefaultLayout } from './layouts/DefaultLayout'
-// import { History } from './pages/History/Index'
-// import { Home } from './pages/Home/Index'
+import { Routes, Route } from 'react-router-dom'
+import { Home } from './Pages/Home/Home'
+import { Checkout } from './Pages/Checkout/Checkout'
+import { Success } from './Pages/Success/Success'
 
-// export function Router() {
-//   return (
-//     <Routes>
-//       <Route path="/" element={<DefaultLayout />}>
-//         <Route path="/" element={<Home />} />
-//         <Route path="/history" element={<History />} />
-//       </Route>
-//     </Routes>
-//   )
-// }
+export function Router() {
+  return (
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/checkout" element={<Checkout />} />
+      <Route path="/success" element={<Success />} />
+    </Routes>
+  )
+}
