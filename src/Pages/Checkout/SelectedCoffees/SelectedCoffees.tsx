@@ -33,7 +33,9 @@ export function SelectedCoffees() {
         </TotalContainer>
 
         <Link to="/success" title="Success">
-          <ConfirmButton>Confirmar Pedido</ConfirmButton>
+          <ConfirmButton /* onClick={handleCheckout} */>
+            Confirmar Pedido
+          </ConfirmButton>
         </Link>
       </ContentContainer>
     </SelectedCoffeeContainer>

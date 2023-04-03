@@ -50,6 +50,7 @@ export const NavBar = styled.nav`
       background: ${(props) => props.theme['yellow-light']};
       color: ${(props) => props.theme['yellow-dark']};
       border-radius: 6px;
+      cursor: pointer;
     }
   }
 `

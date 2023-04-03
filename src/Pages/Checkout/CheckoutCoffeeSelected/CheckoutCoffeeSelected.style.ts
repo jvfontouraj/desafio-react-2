@@ -71,18 +71,25 @@ export const CounterContainer = styled.div`
   .counterNumberContainer {
     display: flex;
     justify-content: center;
-    align-items: center
+    align-items: center;
     width: 1.25em;
     height: auto;
   }
 
   .counterNumber {
     font-size: 1rem;
+    cursor: default;
   }
 
   .counterIcon {
     color: ${(props) => props.theme['purple-']};
     box-sizing: content-box;
+    transition: all 0.3s;
+    cursor: pointer;
+  }
+
+  .counterIcon:hover {
+    color: ${(props) => props.theme['purple-dark']};
   }
 `
 
@@ -95,8 +102,19 @@ export const TrashButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-
   height: 2rem;
+  transition: all 0.3s;
+  cursor: pointer;
+
+  :hover {
+    .trashIcon {
+      color: ${(props) => props.theme['purple-dark']};
+    }
+    .span {
+      color: ${(props) => props.theme['base-subtitle']};
+    }
+    background-color: ${(props) => props.theme['base-hover']};
+  }
 
   .trashIcon {
     color: ${(props) => props.theme['purple-']};

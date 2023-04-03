@@ -2,16 +2,16 @@ import { BrowserRouter } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
 import { defaultTheme } from './Styles/default.style'
 import { GlobalStyle } from './Styles/global'
-
-import { NavBarComponent } from './NavBarComponent/NavBar'
 import { Router } from './Router'
+import { CheckoutContextProvider } from './CheckoutContext'
 
 export function App() {
   return (
     <ThemeProvider theme={defaultTheme}>
       <BrowserRouter>
-        <NavBarComponent />
+        {/* <CheckoutContextProvider> */}
         <Router />
+        {/* </CheckoutContextProvider> */}
       </BrowserRouter>
       <GlobalStyle />
     </ThemeProvider>

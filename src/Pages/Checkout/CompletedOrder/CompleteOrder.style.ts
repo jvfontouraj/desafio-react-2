@@ -74,8 +74,15 @@ export const AdressFormContainer = styled.form`
   }
 
   input[type='text'],
-  input[type='number'] {
+  input[type='number'],
+  input[type='tel'] {
     padding: 0.75rem;
+  }
+
+  input[type='text']:focus,
+  input[type='number']:focus,
+  input[type='tel']:focus {
+    box-shadow: 0 0 0 2px ${(props) => props.theme['yellow-dark']};
   }
 
   .cep,
@@ -86,6 +93,7 @@ export const AdressFormContainer = styled.form`
 
   .uf {
     width: 3.75rem;
+    text-transform: uppercase;
   }
 
   .numero,
@@ -113,6 +121,12 @@ export const ComplementContainer = styled.div`
     font-size: 0.75rem;
     color: ${(props) => props.theme['base-label']};
   }
+
+  /* input[type='text']:focus {
+    ::after {
+      content: '';
+    }
+  } */
 `
 
 // //////////////////////////////////////////////////////////////
@@ -142,17 +156,40 @@ export const PaymentMethodsContent = styled.div`
     display: flex;
     align-items: center;
     padding: 1rem;
-    gap: 0.75rem;
+    gap: 0.7rem;
 
     height: 51px;
-    border: none;
     border-radius: 6px;
-    background-color: ${(props) => props.theme['base-button']};
-
+    cursor: pointer;
     span {
       font-size: 0.75rem;
       line-height: 160%;
       text-transform: uppercase;
+    }
+  }
+
+  .default {
+    border: 1px solid transparent;
+    transition: all 0.3s;
+    background-color: ${(props) => props.theme['base-button']};
+
+    .span {
+      color: ${(props) => props.theme['base-text']};
+    }
+
+    :hover {
+      background-color: ${(props) => props.theme['base-hover']};
+      span {
+        color: ${(props) => props.theme['base-subtitle']};
+      }
+    }
+  }
+
+  .selected {
+    border: 1px solid ${(props) => props.theme['purple-']};
+    background-color: ${(props) => props.theme['purple-light']};
+
+    .span {
       color: ${(props) => props.theme['base-text']};
     }
   }
