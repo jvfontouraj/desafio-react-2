@@ -11,9 +11,11 @@ interface Coffees {
 
 interface CheckoutContextType {
   coffeesCheckout: Coffees | null
-  handleDecreaseButton: () => void
-  handleIncreaseButton: () => void
-  removeCoffees: () => void
+  handleDecreaseButton: (index: any) => void
+  handleIncreaseButton: (index: any) => void
+  removeCoffees: (index: any) => void
+  handlePaymentSelected: (payment: string) => void
+  paymentSelected: string
 }
 
 export const CheckoutContext = createContext({
@@ -21,6 +23,8 @@ export const CheckoutContext = createContext({
   handleDecreaseButton: () => {},
   handleIncreaseButton: () => {},
   removeCoffees: () => {},
+  handlePaymentSelected: () => {},
+  paymentSelected: '',
 } as CheckoutContextType)
 
 interface CheckoutContextProviderProps {
@@ -51,7 +55,13 @@ export function CheckoutContextProvider({
 
   const [coffeesCheckout, setCoffeesCheckout] = useState(coffeesData)
 
-  function handleDecreaseButton(index) {
+  const [paymentSelected, setPaymentSelected] = useState('')
+
+  function handlePaymentSelected(payment: string) {
+    setPaymentSelected(payment)
+  }
+
+  function handleDecreaseButton(index: any) {
     const updateNumberOfCoffees = [...coffeesCheckout]
     updateNumberOfCoffees[index] = {
       ...updateNumberOfCoffees[index],
@@ -60,7 +70,7 @@ export function CheckoutContextProvider({
     setCoffeesCheckout(updateNumberOfCoffees)
   }
 
-  function handleIncreaseButton(index) {
+  function handleIncreaseButton(index: any) {
     const updateNumberOfCoffees = [...coffeesCheckout]
     updateNumberOfCoffees[index] = {
       ...updateNumberOfCoffees[index],
@@ -69,7 +79,7 @@ export function CheckoutContextProvider({
     setCoffeesCheckout(updateNumberOfCoffees)
   }
 
-  function removeCoffees(index) {
+  function removeCoffees(index: any) {
     const updateNumberOfCoffees = [...coffeesCheckout]
     updateNumberOfCoffees[index] = {
       ...updateNumberOfCoffees[index],
@@ -85,6 +95,8 @@ export function CheckoutContextProvider({
         handleDecreaseButton,
         handleIncreaseButton,
         removeCoffees,
+        handlePaymentSelected,
+        paymentSelected,
       }}
     >
       {children}

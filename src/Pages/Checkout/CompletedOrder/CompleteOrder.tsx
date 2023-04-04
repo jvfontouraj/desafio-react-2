@@ -5,6 +5,9 @@ import {
   MapPinLine,
   Money,
 } from 'phosphor-react'
+import { useContext } from 'react'
+import { useFormContext } from 'react-hook-form'
+import { CheckoutContext } from '../../../Contexts/CheckoutContext'
 import {
   AdressContainer,
   AdressFormContainer,
@@ -15,6 +18,9 @@ import {
 } from './CompleteOrder.style'
 
 export function CompletedOrder() {
+  const { register } = useFormContext()
+  const { handlePaymentSelected, paymentSelected } = useContext(CheckoutContext)
+
   return (
     <CompleteOrderContainer>
       <h2>Complete seu pedido</h2>
@@ -92,7 +98,7 @@ export function CompletedOrder() {
         </header>
         <PaymentMethodsContent>
           <button
-            onClick={() => setPaymentSelected('CreditCard')}
+            onClick={() => handlePaymentSelected('CreditCard')}
             className={
               paymentSelected === 'CreditCard' ? 'selected' : 'default'
             }
@@ -101,14 +107,14 @@ export function CompletedOrder() {
             <span>Cartão de Crédito</span>
           </button>
           <button
-            onClick={() => setPaymentSelected('DebitCard')}
+            onClick={() => handlePaymentSelected('DebitCard')}
             className={paymentSelected === 'DebitCard' ? 'selected' : 'default'}
           >
             <Bank size={16} className="purpleIcons" />
             <span>Cartão de Débito</span>
           </button>
           <button
-            onClick={() => setPaymentSelected('Money')}
+            onClick={() => handlePaymentSelected('Money')}
             className={paymentSelected === 'Money' ? 'selected' : 'default'}
           >
             <Money size={16} className="purpleIcons" />

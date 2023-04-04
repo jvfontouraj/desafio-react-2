@@ -35,8 +35,6 @@ export function Checkout() {
 
   const { handleSubmit, watch } = checkoutCoffeeForm
 
-  const [paymentSelected, setPaymentSelected] = useState('')
-
   function handleCheckout(data: CheckoutForm) {
     console.log(data)
   }
