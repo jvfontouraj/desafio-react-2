@@ -21,43 +21,51 @@ export function CheckoutCoffeeSelected() {
 
   return (
     <div>
-      {coffeesCheckout.map((coffee, index) => (
-        <CheckoutCoffeeSelectedContainer key={index}>
-          <img src={expressoTradicional} alt="" />
-          <ContentContainer>
-            <TopRowContainer>
-              <h3>{coffee.coffeeName}</h3>
-              <span>R$ 9,90</span>
-            </TopRowContainer>
-
-            <BottomRowContainer>
+      {coffeesCheckout.map((coffee: any, index: any) => {
+        if (!coffee.numberOfCoffees) {
+          return null
+        } else {
+          return (
+            <CheckoutCoffeeSelectedContainer key={index}>
               <div>
-                <CounterContainer>
-                  <button
-                    disabled={!coffee.numberOfCoffees}
-                    onClick={handleDecreaseButton}
-                  >
-                    <Minus size={14} className="counterIcon" />
-                  </button>
-                  <div className="counterNumberContainer">
-                    <span className="counterNumber">
-                      {coffee.numberOfCoffees}
-                    </span>
-                  </div>
-                  <button onClick={handleIncreaseButton}>
-                    <Plus size={14} className="counterIcon" />
-                  </button>
-                </CounterContainer>
+                <img src={expressoTradicional} alt="" />
+                <ContentContainer>
+                  <TopRowContainer>
+                    <h3>{coffee.coffeeName}</h3>
+                    <span>R$ 9,90</span>
+                  </TopRowContainer>
 
-                <TrashButton onClick={removeCoffees}>
-                  <Trash size={16} className="trashIcon" />
-                  <span>Remover</span>
-                </TrashButton>
+                  <BottomRowContainer>
+                    <div>
+                      <CounterContainer>
+                        <button
+                          disabled={!coffee.numberOfCoffees}
+                          onClick={() => handleDecreaseButton(index)}
+                        >
+                          <Minus size={14} className="counterIcon" />
+                        </button>
+                        <div className="counterNumberContainer">
+                          <span className="counterNumber">
+                            {coffee.numberOfCoffees}
+                          </span>
+                        </div>
+                        <button onClick={() => handleIncreaseButton(index)}>
+                          <Plus size={14} className="counterIcon" />
+                        </button>
+                      </CounterContainer>
+
+                      <TrashButton onClick={() => removeCoffees(index)}>
+                        <Trash size={16} className="trashIcon" />
+                        <span>Remover</span>
+                      </TrashButton>
+                    </div>
+                  </BottomRowContainer>
+                </ContentContainer>
               </div>
-            </BottomRowContainer>
-          </ContentContainer>
-        </CheckoutCoffeeSelectedContainer>
-      ))}
+            </CheckoutCoffeeSelectedContainer>
+          )
+        }
+      })}
     </div>
   )
 }

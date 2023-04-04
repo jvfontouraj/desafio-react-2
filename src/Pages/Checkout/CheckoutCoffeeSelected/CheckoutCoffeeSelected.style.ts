@@ -2,6 +2,7 @@ import styled from 'styled-components'
 
 export const CheckoutCoffeeSelectedContainer = styled.section`
   display: flex;
+  flex-direction: column;
   margin-bottom: 1.5rem;
   padding: 0.5rem 0.25rem;
   padding-bottom: 1.5rem;

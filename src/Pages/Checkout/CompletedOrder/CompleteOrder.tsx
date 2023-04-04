@@ -5,7 +5,6 @@ import {
   MapPinLine,
   Money,
 } from 'phosphor-react'
-import { createContext, useState } from 'react'
 import {
   AdressContainer,
   AdressFormContainer,
@@ -14,35 +13,8 @@ import {
   PaymentContainer,
   PaymentMethodsContent,
 } from './CompleteOrder.style'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import * as zod from 'zod'
-
-const checkoutFormValidationSchema = zod.object({
-  cep: zod.number().min(1, 'Informe o CEP').max(8),
-  rua: zod.string().min(1, 'Informe a Rua'),
-  numero: zod.number().min(1, 'Informe o Número'),
-  complemento: zod.string().optional(),
-  bairro: zod.string().min(1, 'Informe o Bairro'),
-  cidade: zod.string().min(1, 'Informe a Cidade'),
-  uf: zod.string().min(1, 'Informe a UF').max(2),
-})
-
-type CheckoutForm = zod.infer<typeof checkoutFormValidationSchema>
 
 export function CompletedOrder() {
-  const { register, handleSubmit, watch } = useForm({
-    resolver: zodResolver(checkoutFormValidationSchema),
-  })
-
-  const [paymentSelected, setPaymentSelected] = useState('')
-
-  function handleCheckout(data: CheckoutForm) {
-    console.log(data)
-  }
-
-  const formFilled = watch('rua')
-
   return (
     <CompleteOrderContainer>
       <h2>Complete seu pedido</h2>
@@ -54,7 +26,7 @@ export function CompletedOrder() {
             <h4>Informe o endereço onde deseja receber seu pedido</h4>
           </div>
         </header>
-        <AdressFormContainer onSubmit={handleSubmit(handleCheckout)}>
+        <AdressFormContainer>
           <input
             type="tel"
             placeholder="CEP"
@@ -105,9 +77,6 @@ export function CompletedOrder() {
               {...register('uf')}
             />
           </div>
-          <button onClick={handleSubmit} disabled={!formFilled}>
-            Enviar
-          </button>
         </AdressFormContainer>
       </AdressContainer>
 

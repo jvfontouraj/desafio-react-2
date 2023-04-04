@@ -1,13 +1,27 @@
 import { createContext, ReactNode, useState } from 'react'
 
+interface Coffees {
+  id: number
+  coffeeImg: URL
+  tag: string
+  coffeeName: string
+  description: string
+  numberOfCoffees: number
+}
+
 interface CheckoutContextType {
-  coffeesCheckout: {}
+  coffeesCheckout: Coffees | null
   handleDecreaseButton: () => void
   handleIncreaseButton: () => void
   removeCoffees: () => void
 }
 
-export const CheckoutContext = createContext({} as CheckoutContextType)
+export const CheckoutContext = createContext({
+  coffeesCheckout: null,
+  handleDecreaseButton: () => {},
+  handleIncreaseButton: () => {},
+  removeCoffees: () => {},
+} as CheckoutContextType)
 
 interface CheckoutContextProviderProps {
   children: ReactNode
@@ -37,33 +51,30 @@ export function CheckoutContextProvider({
 
   const [coffeesCheckout, setCoffeesCheckout] = useState(coffeesData)
 
-  function handleDecreaseButton() {
-    const updateNumberOfCoffees = coffeesCheckout.map((coffees) => {
-      return {
-        ...coffees,
-        numberOfCoffees: coffees.numberOfCoffees - 1,
-      }
-    })
+  function handleDecreaseButton(index) {
+    const updateNumberOfCoffees = [...coffeesCheckout]
+    updateNumberOfCoffees[index] = {
+      ...updateNumberOfCoffees[index],
+      numberOfCoffees: updateNumberOfCoffees[index].numberOfCoffees - 1,
+    }
     setCoffeesCheckout(updateNumberOfCoffees)
   }
 
-  function handleIncreaseButton() {
-    const updateNumberOfCoffees = coffeesCheckout.map((coffees) => {
-      return {
-        ...coffees,
-        numberOfCoffees: coffees.numberOfCoffees + 1,
-      }
-    })
+  function handleIncreaseButton(index) {
+    const updateNumberOfCoffees = [...coffeesCheckout]
+    updateNumberOfCoffees[index] = {
+      ...updateNumberOfCoffees[index],
+      numberOfCoffees: updateNumberOfCoffees[index].numberOfCoffees + 1,
+    }
     setCoffeesCheckout(updateNumberOfCoffees)
   }
 
-  function removeCoffees() {
-    const updateNumberOfCoffees = coffeesCheckout.map((coffees) => {
-      return {
-        ...coffees,
-        numberOfCoffees: 0,
-      }
-    })
+  function removeCoffees(index) {
+    const updateNumberOfCoffees = [...coffeesCheckout]
+    updateNumberOfCoffees[index] = {
+      ...updateNumberOfCoffees[index],
+      numberOfCoffees: 0,
+    }
     setCoffeesCheckout(updateNumberOfCoffees)
   }
 

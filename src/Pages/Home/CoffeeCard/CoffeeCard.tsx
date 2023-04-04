@@ -1,53 +1,49 @@
 import { CoffeeCardContainer, ShoppingCartButton } from './CoffeeCard.style'
-import ExpressoTradicional from '../../../assets/Coffee/Type=Expresso.png'
+import ExpressoTradicional from '../../../assets/Coffee/Expresso.png'
 import { Minus, Plus, ShoppingCart } from 'phosphor-react'
 import { useContext, useState } from 'react'
-import {
-  CheckoutContext,
-  CheckoutContextProvider,
-} from '../../../Contexts/CheckoutContext'
+import { CheckoutContext } from '../../../Contexts/CheckoutContext'
+import { Link } from 'react-router-dom'
 
-interface CoffeeCardProps {
-  coffeeImg: string
-  tag: string
-  coffeeName: string
-  description: string
-  price: string
-}
-
-export function CoffeeCard(props: CoffeeCardProps) {
+export function CoffeeCard() {
   const { coffeesCheckout, handleDecreaseButton, handleIncreaseButton } =
     useContext(CheckoutContext)
 
   return (
     <div>
-      {coffeesCheckout.map((coffee, index) => (
+      {coffeesCheckout.map((coffee: any, index: any) => (
         <CoffeeCardContainer key={index}>
-          <img src={coffee.coffeeImg} alt="" />
+          <img src={ExpressoTradicional} alt="" />
           <span className="tag">{coffee.tag}</span>
           <h3 className="coffeeName">{coffee.coffeeName}</h3>
           <span className="description">{coffee.description} </span>
           <div className="buy">
             <div className="priceContainer">
               <span className="pricePrefix">R$</span>
-              <span className="price">{coffee.price}</span>
+              <span className="price">9,90</span>
             </div>
             <div className="counterContainer">
               <button
                 disabled={!coffee.numberOfCoffees}
-                onClick={handleDecreaseButton}
+                onClick={() => handleDecreaseButton(index)}
               >
                 <Minus size={14} className="counterIcon" />
               </button>
               <div className="counterNumberContainer">
                 <span className="counterNumber">{coffee.numberOfCoffees}</span>
               </div>
-              <button onClick={handleIncreaseButton}>
+              <button onClick={() => handleIncreaseButton(index)}>
                 <Plus size={14} className="counterIcon" />
               </button>
             </div>
             <ShoppingCartButton>
-              <ShoppingCart weight="fill" size={22} className="shoppingIcon" />
+              <Link to="/checkout">
+                <ShoppingCart
+                  weight="fill"
+                  size={22}
+                  className="shoppingIcon"
+                />
+              </Link>
             </ShoppingCartButton>
           </div>
         </CoffeeCardContainer>
