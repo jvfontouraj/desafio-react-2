@@ -1,5 +1,7 @@
 import { Minus, Plus, Trash } from 'phosphor-react'
-import expressoTradicional from '../../../assets/Coffee/Type=Expresso.png'
+import { useContext } from 'react'
+import expressoTradicional from '../../../assets/Coffee/Expresso.png'
+import { CheckoutContext } from '../../../Contexts/CheckoutContext'
 import {
   BottomRowContainer,
   CheckoutCoffeeSelectedContainer,
@@ -10,36 +12,52 @@ import {
 } from './CheckoutCoffeeSelected.style'
 
 export function CheckoutCoffeeSelected() {
+  const {
+    coffeesCheckout,
+    handleDecreaseButton,
+    handleIncreaseButton,
+    removeCoffees,
+  } = useContext(CheckoutContext)
+
   return (
-    <CheckoutCoffeeSelectedContainer>
-      <img src={expressoTradicional} alt="" />
-      <ContentContainer>
-        <TopRowContainer>
-          <h3>Expresso Tradicional</h3>
-          <span>R$ 9,90</span>
-        </TopRowContainer>
+    <div>
+      {coffeesCheckout.map((coffee, index) => (
+        <CheckoutCoffeeSelectedContainer key={index}>
+          <img src={expressoTradicional} alt="" />
+          <ContentContainer>
+            <TopRowContainer>
+              <h3>{coffee.coffeeName}</h3>
+              <span>R$ 9,90</span>
+            </TopRowContainer>
 
-        <BottomRowContainer>
-          <div>
-            <CounterContainer>
-              <button>
-                <Minus size={14} className="counterIcon" />
-              </button>
-              <div className="counterNumberContainer">
-                <span className="counterNumber">1</span>
+            <BottomRowContainer>
+              <div>
+                <CounterContainer>
+                  <button
+                    disabled={!coffee.numberOfCoffees}
+                    onClick={handleDecreaseButton}
+                  >
+                    <Minus size={14} className="counterIcon" />
+                  </button>
+                  <div className="counterNumberContainer">
+                    <span className="counterNumber">
+                      {coffee.numberOfCoffees}
+                    </span>
+                  </div>
+                  <button onClick={handleIncreaseButton}>
+                    <Plus size={14} className="counterIcon" />
+                  </button>
+                </CounterContainer>
+
+                <TrashButton onClick={removeCoffees}>
+                  <Trash size={16} className="trashIcon" />
+                  <span>Remover</span>
+                </TrashButton>
               </div>
-              <button>
-                <Plus size={14} className="counterIcon" />
-              </button>
-            </CounterContainer>
-
-            <TrashButton>
-              <Trash size={16} className="trashIcon" />
-              <span>Remover</span>
-            </TrashButton>
-          </div>
-        </BottomRowContainer>
-      </ContentContainer>
-    </CheckoutCoffeeSelectedContainer>
+            </BottomRowContainer>
+          </ContentContainer>
+        </CheckoutCoffeeSelectedContainer>
+      ))}
+    </div>
   )
 }

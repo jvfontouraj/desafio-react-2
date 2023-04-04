@@ -1,47 +1,57 @@
 import { CoffeeCardContainer, ShoppingCartButton } from './CoffeeCard.style'
 import ExpressoTradicional from '../../../assets/Coffee/Type=Expresso.png'
 import { Minus, Plus, ShoppingCart } from 'phosphor-react'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
+import {
+  CheckoutContext,
+  CheckoutContextProvider,
+} from '../../../Contexts/CheckoutContext'
 
-export function CoffeeCard() {
-  const [numberOfCoffees, setNumberOfCoffees] = useState(0)
+interface CoffeeCardProps {
+  coffeeImg: string
+  tag: string
+  coffeeName: string
+  description: string
+  price: string
+}
 
-  function handleDecreaseButton() {
-    setNumberOfCoffees(numberOfCoffees - 1)
-  }
-
-  function handleIncreaseButton() {
-    setNumberOfCoffees(numberOfCoffees + 1)
-  }
+export function CoffeeCard(props: CoffeeCardProps) {
+  const { coffeesCheckout, handleDecreaseButton, handleIncreaseButton } =
+    useContext(CheckoutContext)
 
   return (
-    <CoffeeCardContainer>
-      <img src={ExpressoTradicional} alt="" />
-      <span className="tag">tradicional</span>
-      <h3 className="coffeeName">Expresso Tradicional</h3>
-      <span className="description">
-        O tradicional café feito com água quente e grãos moídos
-      </span>
-      <div className="buy">
-        <div className="priceContainer">
-          <span className="pricePrefix">R$</span>
-          <span className="price">9,90</span>
-        </div>
-        <div className="counterContainer">
-          <button disabled={!numberOfCoffees} onClick={handleDecreaseButton}>
-            <Minus size={14} className="counterIcon" />
-          </button>
-          <div className="counterNumberContainer">
-            <span className="counterNumber">{numberOfCoffees}</span>
+    <div>
+      {coffeesCheckout.map((coffee, index) => (
+        <CoffeeCardContainer key={index}>
+          <img src={coffee.coffeeImg} alt="" />
+          <span className="tag">{coffee.tag}</span>
+          <h3 className="coffeeName">{coffee.coffeeName}</h3>
+          <span className="description">{coffee.description} </span>
+          <div className="buy">
+            <div className="priceContainer">
+              <span className="pricePrefix">R$</span>
+              <span className="price">{coffee.price}</span>
+            </div>
+            <div className="counterContainer">
+              <button
+                disabled={!coffee.numberOfCoffees}
+                onClick={handleDecreaseButton}
+              >
+                <Minus size={14} className="counterIcon" />
+              </button>
+              <div className="counterNumberContainer">
+                <span className="counterNumber">{coffee.numberOfCoffees}</span>
+              </div>
+              <button onClick={handleIncreaseButton}>
+                <Plus size={14} className="counterIcon" />
+              </button>
+            </div>
+            <ShoppingCartButton>
+              <ShoppingCart weight="fill" size={22} className="shoppingIcon" />
+            </ShoppingCartButton>
           </div>
-          <button onClick={handleIncreaseButton}>
-            <Plus size={14} className="counterIcon" />
-          </button>
-        </div>
-        <ShoppingCartButton>
-          <ShoppingCart weight="fill" size={22} className="shoppingIcon" />
-        </ShoppingCartButton>
-      </div>
-    </CoffeeCardContainer>
+        </CoffeeCardContainer>
+      ))}
+    </div>
   )
 }
