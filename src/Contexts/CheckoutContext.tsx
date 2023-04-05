@@ -10,17 +10,18 @@ interface FormDataTypes {
   uf: string
 }
 
-interface Coffees {
+export interface Coffee {
   id: number
-  coffeeImg: URL
+  coffeeImg: string
   tag: string
   coffeeName: string
   description: string
-  numberOfCoffees: number
+  qtd: number
+  price: number
 }
 
 interface CheckoutContextType {
-  coffeesCheckout: Coffees | null
+  coffeesCheckout: Coffee[]
   handleDecreaseButton: (index: any) => void
   handleIncreaseButton: (index: any) => void
   removeCoffees: (index: any) => void
@@ -31,22 +32,14 @@ interface CheckoutContextType {
 }
 
 export const CheckoutContext = createContext({
-  coffeesCheckout: null,
+  coffeesCheckout: [],
   handleDecreaseButton: () => {},
   handleIncreaseButton: () => {},
   removeCoffees: () => {},
   handlePaymentSelected: () => {},
   paymentSelected: '',
   storeFormData: () => {},
-  formData: {
-    cep: 0,
-    rua: '',
-    numero: 0,
-    complemento: '',
-    bairro: '',
-    cidade: '',
-    uf: '',
-  },
+  formData: {} as FormDataTypes,
 } as CheckoutContextType)
 
 interface CheckoutContextProviderProps {
@@ -56,14 +49,15 @@ interface CheckoutContextProviderProps {
 export function CheckoutContextProvider({
   children,
 }: CheckoutContextProviderProps) {
-  const coffeesData = [
+  const coffeesData: Coffee[] = [
     {
       id: 0,
       coffeeImg: '../../assets/Coffee/Expresso.png',
       tag: 'tradicional',
       coffeeName: 'Expresso Tradicional',
       description: 'O tradicional café feito com água quente e grãos moídos',
-      numberOfCoffees: 0,
+      qtd: 0,
+      price: 9.99,
     },
     {
       id: 1,
@@ -71,59 +65,49 @@ export function CheckoutContextProvider({
       tag: 'tradicional',
       coffeeName: 'Expresso Americano',
       description: 'Expresso diluído, menos intenso que o tradicional',
-      numberOfCoffees: 0,
+      qtd: 0,
+      price: 8.99,
     },
   ]
 
   const [coffeesCheckout, setCoffeesCheckout] = useState(coffeesData)
 
-  const [paymentSelected, setPaymentSelected] = useState('')
+  const [paymentSelected, setPaymentSelected] = useState<string>('')
 
-  const [formData, setFormData] = useState([] as FormDataTypes[])
+  const [formData, setFormData] = useState({} as FormDataTypes)
 
   function handlePaymentSelected(payment: string) {
     setPaymentSelected(payment)
   }
 
-  function handleDecreaseButton(index: any) {
-    const updateNumberOfCoffees = [...coffeesCheckout]
-    updateNumberOfCoffees[index] = {
-      ...updateNumberOfCoffees[index],
-      numberOfCoffees: updateNumberOfCoffees[index].numberOfCoffees - 1,
-    }
-    setCoffeesCheckout(updateNumberOfCoffees)
+  function handleDecreaseButton(id: number) {
+    const items = coffeesCheckout.map((item) =>
+      item.id === id ? { ...item, qtd: item.qtd - 1 } : item,
+    )
+
+    setCoffeesCheckout(items)
   }
 
-  function handleIncreaseButton(index: any) {
-    const updateNumberOfCoffees = [...coffeesCheckout]
-    updateNumberOfCoffees[index] = {
-      ...updateNumberOfCoffees[index],
-      numberOfCoffees: updateNumberOfCoffees[index].numberOfCoffees + 1,
-    }
-    setCoffeesCheckout(updateNumberOfCoffees)
+  function handleIncreaseButton(id: number) {
+    const items = coffeesCheckout.map((item) =>
+      item.id === id ? { ...item, qtd: item.qtd + 1 } : item,
+    )
+
+    setCoffeesCheckout(items)
   }
 
-  function removeCoffees(index: any) {
-    const updateNumberOfCoffees = [...coffeesCheckout]
-    updateNumberOfCoffees[index] = {
-      ...updateNumberOfCoffees[index],
-      numberOfCoffees: 0,
-    }
-    setCoffeesCheckout(updateNumberOfCoffees)
+  function removeCoffees(id: number) {
+    const items = coffeesCheckout.filter((item) => item.id !== id)
+
+    setCoffeesCheckout(items)
   }
 
   function storeFormData(data: FormDataTypes) {
     const getDataFromForm: FormDataTypes = {
-      cep: data.cep,
-      rua: data.rua,
-      numero: data.numero,
-      complemento: data.complemento,
-      bairro: data.bairro,
-      cidade: data.cidade,
-      uf: data.uf,
+      ...data,
     }
 
-    setFormData((state) => [...state, getDataFromForm])
+    setFormData((state) => ({ ...state, ...getDataFromForm }))
     console.log(formData)
   }
 

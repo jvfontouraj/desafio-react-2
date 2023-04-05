@@ -8,6 +8,7 @@ import {
 import { useContext } from 'react'
 import { useFormContext } from 'react-hook-form'
 import { CheckoutContext } from '../../../Contexts/CheckoutContext'
+import { CheckoutFormValues } from '../Checkout'
 import {
   AdressContainer,
   AdressFormContainer,
@@ -18,7 +19,10 @@ import {
 } from './CompleteOrder.style'
 
 export function CompletedOrder() {
-  const { register } = useFormContext()
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext<CheckoutFormValues>()
   const { handlePaymentSelected, paymentSelected } = useContext(CheckoutContext)
 
   return (
@@ -41,6 +45,7 @@ export function CompletedOrder() {
             maxLength={8}
             {...register('cep')}
           />
+          {errors.cep && <span>{errors.cep.message}</span>}
           <input
             type="text"
             id="rua"
@@ -48,14 +53,17 @@ export function CompletedOrder() {
             className="rua"
             {...register('rua')}
           />
+          {errors.rua && <span>{errors.rua.message}</span>}
+
           <div>
             <input
-              type="number"
+              // type="number"
               id="numero"
               placeholder="Número"
               className="numero"
               {...register('numero')}
             />
+            {errors.numero && <span>{errors.numero.message}</span>}
             <ComplementContainer>
               <input
                 type="text"
@@ -64,6 +72,7 @@ export function CompletedOrder() {
                 className="complemento"
                 {...register('complemento')}
               />
+              {errors.complemento && <span>{errors.complemento.message}</span>}
             </ComplementContainer>
           </div>
           <div>
@@ -74,6 +83,8 @@ export function CompletedOrder() {
               className="bairro"
               {...register('bairro')}
             />
+            {errors.bairro && <span>{errors.bairro.message}</span>}
+
             <input
               type="text"
               id="cidade"
@@ -81,6 +92,7 @@ export function CompletedOrder() {
               className="cidade"
               {...register('cidade')}
             />
+            {errors.cidade && <span>{errors.cidade.message}</span>}
             <input
               type="text"
               id="uf"
@@ -89,6 +101,7 @@ export function CompletedOrder() {
               maxLength={2}
               {...register('uf')}
             />
+            {errors.uf && <span>{errors.uf.message}</span>}
           </div>
         </AdressFormContainer>
       </AdressContainer>
@@ -109,6 +122,7 @@ export function CompletedOrder() {
             className={
               paymentSelected === 'CreditCard' ? 'selected' : 'default'
             }
+            type="button"
           >
             <CreditCard size={16} className="purpleIcons" />
             <span>Cartão de Crédito</span>
@@ -116,6 +130,7 @@ export function CompletedOrder() {
           <button
             onClick={() => handlePaymentSelected('DebitCard')}
             className={paymentSelected === 'DebitCard' ? 'selected' : 'default'}
+            type="button"
           >
             <Bank size={16} className="purpleIcons" />
             <span>Cartão de Débito</span>
@@ -123,6 +138,7 @@ export function CompletedOrder() {
           <button
             onClick={() => handlePaymentSelected('Money')}
             className={paymentSelected === 'Money' ? 'selected' : 'default'}
+            type="button"
           >
             <Money size={16} className="purpleIcons" />
             <span>Dinheiro</span>

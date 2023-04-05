@@ -20,13 +20,13 @@ export function CheckoutCoffeeSelected() {
   } = useContext(CheckoutContext)
 
   return (
-    <div>
-      {coffeesCheckout.map((coffee: any, index: any) => {
-        if (!coffee.numberOfCoffees) {
+    <>
+      {coffeesCheckout.map((coffee) => {
+        if (!coffee.qtd) {
           return null
         } else {
           return (
-            <CheckoutCoffeeSelectedContainer key={index}>
+            <CheckoutCoffeeSelectedContainer key={coffee.id}>
               <div>
                 <img src={expressoTradicional} alt="" />
                 <ContentContainer>
@@ -39,22 +39,24 @@ export function CheckoutCoffeeSelected() {
                     <div>
                       <CounterContainer>
                         <button
-                          disabled={!coffee.numberOfCoffees}
-                          onClick={() => handleDecreaseButton(index)}
+                          disabled={!coffee.qtd}
+                          onClick={() => handleDecreaseButton(coffee.id)}
+                          type="button"
                         >
                           <Minus size={14} className="counterIcon" />
                         </button>
                         <div className="counterNumberContainer">
-                          <span className="counterNumber">
-                            {coffee.numberOfCoffees}
-                          </span>
+                          <span className="counterNumber">{coffee.qtd}</span>
                         </div>
-                        <button onClick={() => handleIncreaseButton(index)}>
+                        <button
+                          onClick={() => handleIncreaseButton(coffee.id)}
+                          type="button"
+                        >
                           <Plus size={14} className="counterIcon" />
                         </button>
                       </CounterContainer>
 
-                      <TrashButton onClick={() => removeCoffees(index)}>
+                      <TrashButton onClick={() => removeCoffees(coffee.id)}>
                         <Trash size={16} className="trashIcon" />
                         <span>Remover</span>
                       </TrashButton>
@@ -66,6 +68,6 @@ export function CheckoutCoffeeSelected() {
           )
         }
       })}
-    </div>
+    </>
   )
 }
