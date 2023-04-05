@@ -16,6 +16,12 @@ import { CheckoutCoffeeSelected } from './CheckoutCoffeeSelected/CheckoutCoffeeS
 import { Link } from 'react-router-dom'
 import { useContext } from 'react'
 import { CheckoutContext } from '../../Contexts/CheckoutContext'
+import {
+  PaymentContainer,
+  PaymentMethodsContent,
+} from './CompletedOrder/CompleteOrder.style'
+
+import { Bank, CreditCard, CurrencyDollar, Money } from 'phosphor-react'
 
 // const checkoutFormValidationSchema = zod.object({
 //   cep: zod.number().min(1, 'Informe o CEP').max(8),
@@ -30,7 +36,8 @@ import { CheckoutContext } from '../../Contexts/CheckoutContext'
 // type CheckoutForm = zod.infer<typeof checkoutFormValidationSchema>
 
 export function Checkout() {
-  const { storeFormData } = useContext(CheckoutContext)
+  const { storeFormData, handlePaymentSelected, paymentSelected } =
+    useContext(CheckoutContext)
 
   const checkoutCoffeeForm = useForm({
     // resolver: zodResolver(checkoutFormValidationSchema),
@@ -61,6 +68,7 @@ export function Checkout() {
           <FormProvider {...checkoutCoffeeForm}>
             <CompletedOrder />
           </FormProvider>
+
           <SelectedCoffeeContainer>
             <h2>Cafés selecionados</h2>
             <ContentContainer>
@@ -83,7 +91,11 @@ export function Checkout() {
               </TotalContainer>
 
               <Link to="/success" title="Success">
-                <ConfirmButton type="submit" disabled={!formFilled}>
+                <ConfirmButton
+                  // onClick={handleSubmit}
+                  type="submit"
+                  disabled={!formFilled}
+                >
                   Confirmar Pedido
                 </ConfirmButton>
               </Link>

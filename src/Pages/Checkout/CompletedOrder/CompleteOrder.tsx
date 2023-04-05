@@ -92,7 +92,6 @@ export function CompletedOrder() {
           </div>
         </AdressFormContainer>
       </AdressContainer>
-
       <PaymentContainer>
         <header>
           <CurrencyDollar size={22} className="purpleIcons" />
@@ -105,6 +104,7 @@ export function CompletedOrder() {
         </header>
         <PaymentMethodsContent>
           <button
+            // type="button"
             onClick={() => handlePaymentSelected('CreditCard')}
             className={
               paymentSelected === 'CreditCard' ? 'selected' : 'default'
@@ -114,6 +114,7 @@ export function CompletedOrder() {
             <span>Cartão de Crédito</span>
           </button>
           <button
+            // type="button"
             onClick={() => handlePaymentSelected('DebitCard')}
             className={paymentSelected === 'DebitCard' ? 'selected' : 'default'}
           >
@@ -121,6 +122,7 @@ export function CompletedOrder() {
             <span>Cartão de Débito</span>
           </button>
           <button
+            // type="button"
             onClick={() => handlePaymentSelected('Money')}
             className={paymentSelected === 'Money' ? 'selected' : 'default'}
           >
