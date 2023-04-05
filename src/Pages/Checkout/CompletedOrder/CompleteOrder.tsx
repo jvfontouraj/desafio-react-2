@@ -35,6 +35,7 @@ export function CompletedOrder() {
         <AdressFormContainer>
           <input
             type="tel"
+            id="cep"
             placeholder="CEP"
             className="cep"
             maxLength={8}
@@ -42,6 +43,7 @@ export function CompletedOrder() {
           />
           <input
             type="text"
+            id="rua"
             placeholder="Rua"
             className="rua"
             {...register('rua')}
@@ -49,6 +51,7 @@ export function CompletedOrder() {
           <div>
             <input
               type="number"
+              id="numero"
               placeholder="Número"
               className="numero"
               {...register('numero')}
@@ -56,6 +59,7 @@ export function CompletedOrder() {
             <ComplementContainer>
               <input
                 type="text"
+                id="complemento"
                 placeholder="Completemento"
                 className="complemento"
                 {...register('complemento')}
@@ -65,18 +69,21 @@ export function CompletedOrder() {
           <div>
             <input
               type="text"
+              id="bairro"
               placeholder="Bairro"
               className="bairro"
               {...register('bairro')}
             />
             <input
               type="text"
+              id="cidade"
               placeholder="Cidade"
               className="cidade"
               {...register('cidade')}
             />
             <input
               type="text"
+              id="uf"
               placeholder="UF"
               className="uf"
               maxLength={2}

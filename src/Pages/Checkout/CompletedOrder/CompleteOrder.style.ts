@@ -52,7 +52,7 @@ export const AdressContainer = styled.div`
 `
 // ///////////////////////////////////////////////
 
-export const AdressFormContainer = styled.form`
+export const AdressFormContainer = styled.section`
   display: flex;
   flex-direction: column;
 

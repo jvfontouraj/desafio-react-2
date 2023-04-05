@@ -1,5 +1,15 @@
 import { createContext, ReactNode, useState } from 'react'
 
+interface FormDataTypes {
+  cep: number
+  rua: string
+  numero: number
+  complemento: string
+  bairro: string
+  cidade: string
+  uf: string
+}
+
 interface Coffees {
   id: number
   coffeeImg: URL
@@ -16,6 +26,8 @@ interface CheckoutContextType {
   removeCoffees: (index: any) => void
   handlePaymentSelected: (payment: string) => void
   paymentSelected: string
+  storeFormData: (data: any) => void
+  formData: FormDataTypes
 }
 
 export const CheckoutContext = createContext({
@@ -25,6 +37,16 @@ export const CheckoutContext = createContext({
   removeCoffees: () => {},
   handlePaymentSelected: () => {},
   paymentSelected: '',
+  storeFormData: () => {},
+  formData: {
+    cep: 0,
+    rua: '',
+    numero: 0,
+    complemento: '',
+    bairro: '',
+    cidade: '',
+    uf: '',
+  },
 } as CheckoutContextType)
 
 interface CheckoutContextProviderProps {
@@ -57,6 +79,8 @@ export function CheckoutContextProvider({
 
   const [paymentSelected, setPaymentSelected] = useState('')
 
+  const [formData, setFormData] = useState([] as FormDataTypes[])
+
   function handlePaymentSelected(payment: string) {
     setPaymentSelected(payment)
   }
@@ -88,6 +112,21 @@ export function CheckoutContextProvider({
     setCoffeesCheckout(updateNumberOfCoffees)
   }
 
+  function storeFormData(data: FormDataTypes) {
+    const getDataFromForm: FormDataTypes = {
+      cep: data.cep,
+      rua: data.rua,
+      numero: data.numero,
+      complemento: data.complemento,
+      bairro: data.bairro,
+      cidade: data.cidade,
+      uf: data.uf,
+    }
+
+    setFormData((state) => [...state, getDataFromForm])
+    console.log(formData)
+  }
+
   return (
     <CheckoutContext.Provider
       value={{
@@ -97,6 +136,8 @@ export function CheckoutContextProvider({
         removeCoffees,
         handlePaymentSelected,
         paymentSelected,
+        storeFormData,
+        formData,
       }}
     >
       {children}
